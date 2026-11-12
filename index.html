@@ -3,52 +3,98 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Matjar Online - متجر إلكتروني</title>
+    <title>LUXURY STORE | متجر العصر</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <!-- Header -->
-    <header>
-        <div class="logo">🛍️ Matjar<span>Store</span></div>
-        <div class="search-bar">
-            <input type="text" id="searchInput" placeholder="قلب على منتوج..." onkeyup="searchProducts()">
+    <!-- Top Announcement Bar -->
+    <div class="top-bar">
+        🔥 توصيل سريع لجميع المدن المغربية • الدفع عند الاستلام 🚚
+    </div>
+
+    <!-- Header / Navbar -->
+    <header class="navbar">
+        <div class="logo">LUXURY<span>.MA</span></div>
+        <div class="search-box">
+            <input type="text" id="searchInput" placeholder="ابحث عن منتوج راقي..." onkeyup="searchProducts()">
         </div>
-        <button class="cart-btn" onclick="toggleCart()">
-            🛒 السلة (<span id="cart-count">0</span>)
-        </button>
+        <div class="nav-actions">
+            <button class="cart-btn" onclick="toggleCart()">
+                🛒 السلة <span id="cart-count">0</span>
+            </button>
+        </div>
     </header>
 
-    <!-- Banner -->
-    <section class="banner">
-        <h1>مرحبا بيك في متجرنا الإلكتروني</h1>
-        <p>أحسن الأثمنة مع التوصيل لجميع المدن المغربية (الدفع عند الاستلام)</p>
+    <!-- Hero Modern Banner -->
+    <section class="hero-banner">
+        <div class="hero-content">
+            <h1>ارتقِ بأسلوب حياتك مع أحدث المنتجات العصرية</h1>
+            <p>أرقى الماركات، جودة عالية، وأثمنة تنافسية تصل حتى باب دارك.</p>
+            <a href="#products-list" class="cta-btn">تصفح المنتجات ✨</a>
+        </div>
     </section>
 
-    <!-- Products Container -->
-    <main class="products-container" id="products-list">
-        <!-- Products ghadi y-t'affichaw hna b JavaScript -->
+    <!-- Products Grid -->
+    <main class="main-container">
+        <div class="section-title">
+            <h2>منتجات مميزة</h2>
+            <p>اختر ما يناسب ذوقك الرفيع</p>
+        </div>
+        <div class="products-grid" id="products-list">
+            <!-- Dynamic products -->
+        </div>
     </main>
 
-    <!-- Cart Sidebar (Panier) -->
-    <div class="cart-sidebar" id="cart-sidebar">
-        <div class="cart-header">
-            <h2>سلة المشتريات</h2>
-            <button class="close-btn" onclick="toggleCart()">✖</button>
+    <!-- Cart Drawer -->
+    <div class="cart-overlay" id="cartOverlay" onclick="toggleCart()"></div>
+    <div class="cart-drawer" id="cartDrawer">
+        <div class="drawer-header">
+            <h3>سلة المشتريات</h3>
+            <button class="close-drawer" onclick="toggleCart()">✕</button>
         </div>
-        <div class="cart-items" id="cart-items">
-            <!-- Les produits li khtar l-client -->
+        <div class="cart-items" id="cartItems">
+            <!-- Cart items -->
         </div>
-        <div class="cart-footer">
-            <h3>المجموع: <span id="cart-total">0</span> درهم</h3>
-            <form id="checkout-form" onsubmit="submitOrder(event)">
-                <input type="text" id="client-name" placeholder="الاسم الكامل" required>
-                <input type="tel" id="client-phone" placeholder="رقم الهاتف (مثلا: 0600000000)" required>
-                <input type="text" id="client-city" placeholder="المدينة" required>
-                <button type="submit" class="order-btn">تأكيد الطلب (الدفع عند الاستلام)</button>
+        <div class="drawer-footer">
+            <div class="total-row">
+                <span>المجموع الكلي:</span>
+                <span id="cartTotal">0</span> درهم
+            </div>
+            <form id="checkoutForm" onsubmit="submitOrder(event)">
+                <input type="text" id="clientName" placeholder="الاسم الكامل" required>
+                <input type="tel" id="clientPhone" placeholder="رقم الهاتف (مثال: 0612345678)" required>
+                <input type="text" id="clientCity" placeholder="المدينة / العنوان" required>
+                <button type="submit" class="checkout-btn">تأكيد الطلب (الدفع عند الاستلام)</button>
             </form>
         </div>
     </div>
+
+    <!-- Footer Asri -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-col">
+                <h3>LUXURY.MA</h3>
+                <p>وجهتك الأولى للتسوق الإلكتروني الذكي والآمن في المغرب.</p>
+            </div>
+            <div class="footer-col">
+                <h4>روابط سريعة</h4>
+                <a href="index.html">الرئيسية</a>
+                <a href="privacy.html">سياسة الخصوصية</a>
+                <a href="contact.html">اتصل بنا</a>
+            </div>
+            <div class="footer-col">
+                <h4>الدعم والمساعدة</h4>
+                <p>📞 واتساب: 212600000000+</p>
+                <p>📧 support@luxury.ma</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2026 LUXURY.MA - جميع الحقوق محفوظة.</p>
+        </div>
+    </footer>
 
     <script src="script.js"></script>
 </body>
