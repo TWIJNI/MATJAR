@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Matjar Online - متجر إلكتروني</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Header -->
+    <header>
+        <div class="logo">🛍️ Matjar<span>Store</span></div>
+        <div class="search-bar">
+            <input type="text" id="searchInput" placeholder="قلب على منتوج..." onkeyup="searchProducts()">
+        </div>
+        <button class="cart-btn" onclick="toggleCart()">
+            🛒 السلة (<span id="cart-count">0</span>)
+        </button>
+    </header>
+
+    <!-- Banner -->
+    <section class="banner">
+        <h1>مرحبا بيك في متجرنا الإلكتروني</h1>
+        <p>أحسن الأثمنة مع التوصيل لجميع المدن المغربية (الدفع عند الاستلام)</p>
+    </section>
+
+    <!-- Products Container -->
+    <main class="products-container" id="products-list">
+        <!-- Products ghadi y-t'affichaw hna b JavaScript -->
+    </main>
+
+    <!-- Cart Sidebar (Panier) -->
+    <div class="cart-sidebar" id="cart-sidebar">
+        <div class="cart-header">
+            <h2>سلة المشتريات</h2>
+            <button class="close-btn" onclick="toggleCart()">✖</button>
+        </div>
+        <div class="cart-items" id="cart-items">
+            <!-- Les produits li khtar l-client -->
+        </div>
+        <div class="cart-footer">
+            <h3>المجموع: <span id="cart-total">0</span> درهم</h3>
+            <form id="checkout-form" onsubmit="submitOrder(event)">
+                <input type="text" id="client-name" placeholder="الاسم الكامل" required>
+                <input type="tel" id="client-phone" placeholder="رقم الهاتف (مثلا: 0600000000)" required>
+                <input type="text" id="client-city" placeholder="المدينة" required>
+                <button type="submit" class="order-btn">تأكيد الطلب (الدفع عند الاستلام)</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
