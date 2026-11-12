@@ -1,140 +1,135 @@
-// 1. Liste dial les produits (T9der t-beddelhom w tzid li bghiti)
 const products = [
     {
         id: 1,
-        name: "ساعة ذكية رياضية (Smart Watch)",
-        price: 250,
-        image: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=500&q=80"
+        name: "ساعة ذكية فائقة الأداء (Ultra Watch)",
+        price: 299,
+        image: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=600&q=80"
     },
     {
         id: 2,
-        name: "سماعات بلوتوث لاسلكية (AirPods)",
-        price: 180,
-        image: "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=500&q=80"
+        name: "سماعات لاسلكية برو (Pods Pro)",
+        price: 220,
+        image: "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=600&q=80"
     },
     {
         id: 3,
-        name: "حذاء رياضي مريح",
-        price: 320,
-        image: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=500&q=80"
+        name: "حذاء رياضي عصري خفيف",
+        price: 350,
+        image: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=600&q=80"
     },
     {
         id: 4,
-        name: "حقيبة ظهر عصرية",
-        price: 200,
-        image: "https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=500&q=80"
+        name: "حقيبة ظهر ذكية مقاومة للماء",
+        price: 260,
+        image: "https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=600&q=80"
     },
     {
         id: 5,
-        name: "نظارات شمسية كلاسيكية",
-        price: 150,
-        image: "https://images.unsplash.com/photo-1572635196237-14b3f281503f?w=500&q=80"
+        name: "نظارات شمسية بريميوم ديزاين",
+        price: 180,
+        image: "https://images.unsplash.com/photo-1572635196237-14b3f281503f?w=600&q=80"
     },
     {
         id: 6,
-        name: "عطر رجالي فاخر",
-        price: 400,
-        image: "https://images.unsplash.com/photo-1523293182086-7651a899d37f?w=500&q=80"
+        name: "عطر فاخر إصدار خاص",
+        price: 450,
+        image: "https://images.unsplash.com/photo-1523293182086-7651a899d37f?w=600&q=80"
     }
 ];
 
 let cart = [];
 
-// 2. Afficher les produits f la page
 function displayProducts(items) {
     const container = document.getElementById("products-list");
     container.innerHTML = "";
     items.forEach(product => {
         container.innerHTML += `
             <div class="product-card">
-                <img src="${product.image}" alt="${product.name}">
-                <h3>${product.name}</h3>
-                <p class="price">${product.price} درهم</p>
-                <button class="add-btn" onclick="addToCart(${product.id})">أضف إلى السلة 🛒</button>
+                <div class="product-img-wrapper">
+                    <img src="${product.image}" alt="${product.name}">
+                </div>
+                <div class="product-info">
+                    <h3>${product.name}</h3>
+                    <div class="product-price">${product.price} درهم</div>
+                    <button class="add-to-cart-btn" onclick="addToCart(${product.id})">أضف إلى السلة 🛒</button>
+                </div>
             </div>
         `;
     });
 }
 
-// 3. Recherche
 function searchProducts() {
     const query = document.getElementById("searchInput").value.toLowerCase();
     const filtered = products.filter(p => p.name.toLowerCase().includes(query));
     displayProducts(filtered);
 }
 
-// 4. Zid produit l-panier
 function addToCart(id) {
     const product = products.find(p => p.id === id);
     cart.push(product);
     updateCart();
+    toggleCart(); // Y-hell l-drawer otomatis bach y-ban l-client l-produit li zad
 }
 
-// 5. Mseh produit mn l-panier
 function removeFromCart(index) {
     cart.splice(index, 1);
     updateCart();
 }
 
-// 6. Mise à jour dial l-panier
 function updateCart() {
     document.getElementById("cart-count").innerText = cart.length;
-    const cartItems = document.getElementById("cart-items");
-    const cartTotal = document.getElementById("cart-total");
-    
-    cartItems.innerHTML = "";
+    const cartItemsContainer = document.getElementById("cartItems");
     let total = 0;
 
+    cartItemsContainer.innerHTML = "";
     cart.forEach((item, index) => {
         total += item.price;
-        cartItems.innerHTML += `
-            <div class="cart-item">
+        cartItemsContainer.innerHTML += `
+            <div class="cart-item-row">
                 <div>
-                    <h4>${item.name}</h4>
-                    <small>${item.price} درهم</small>
+                    <h4 style="font-size:14px; margin-bottom:4px;">${item.name}</h4>
+                    <span style="color:var(--accent); font-size:13px;">${item.price} درهم</span>
                 </div>
-                <button class="remove-btn" onclick="removeFromCart(${index})">حذف</button>
+                <button class="remove-item" onclick="removeFromCart(${index})">حذف</button>
             </div>
         `;
     });
 
-    cartTotal.innerText = total;
+    document.getElementById("cartTotal").innerText = total;
 }
 
-// 7. Hell w sed l-panier
 function toggleCart() {
-    document.getElementById("cart-sidebar").classList.toggle("active");
+    const drawer = document.getElementById("cartDrawer");
+    const overlay = document.getElementById("cartOverlay");
+    drawer.classList.toggle("active");
+    overlay.style.display = drawer.classList.contains("active") ? "block" : "none";
 }
 
-// 8. Envoyer la commande (WhatsApp integration)
 function submitOrder(event) {
     event.preventDefault();
     if (cart.length === 0) {
-        alert("السلة فارغة! اختار شي منتوج بعدا.");
+        alert("السلة فارغة!");
         return;
     }
 
-    const name = document.getElementById("client-name").value;
-    const phone = document.getElementById("client-phone").value;
-    const city = document.getElementById("client-city").value;
-    
-    let orderDetails = cart.map(item => `- ${item.name} (${item.price} DH)`).join("%0A");
-    let total = document.getElementById("cart-total").innerText;
+    const name = document.getElementById("clientName").value;
+    const phone = document.getElementById("clientPhone").value;
+    const city = document.getElementById("clientCity").value;
 
-    // Bdel had nemra b nemrtk dial WhatsApp (bla 0 f lwel, dir 212)
-    const yourWhatsAppNumber = "212600000000"; 
-    
-    const message = `طلب جديد من المتجر:%0A%0A*الاسم:* ${name}%0A*الهاتف:* ${phone}%0A*المدينة:* ${city}%0A%0A*المنتجات:*%0A${orderDetails}%0A%0A*المجموع:* ${total} درهم`;
+    let itemsList = cart.map(i => `- ${i.name} (${i.price} DH)`).join("%0A");
+    let total = document.getElementById("cartTotal").innerText;
 
-    // Y-sift l-client directement l-WhatsApp dialk bach y-confirmer
-    window.open(`https://wa.me/${yourWhatsAppNumber}?text=${message}`, "_blank");
+    // Bdel had nemra b nemrtk dial WhatsApp (Mtal: 212600000000)
+    const whatsAppNumber = "212600000000";
 
-    // Khwi l-panier mora la commande
+    const msg = `🛒 *طلب جديد من المتجر العصري*%0A%0A👤 *الاسم:* ${name}%0A📱 *الهاتف:* ${phone}%0A📍 *المدينة:* ${city}%0A%0A📦 *المنتجات المطلوبة:*%0A${itemsList}%0A%0A💰 *المجموع:* ${total} درهم%0A✨ _الدفع عند الاستلام_`;
+
+    window.open(`https://wa.me/${whatsAppNumber}?text=${msg}`, "_blank");
+
     cart = [];
     updateCart();
     toggleCart();
-    document.getElementById("checkout-form").reset();
+    document.getElementById("checkoutForm").reset();
 }
 
-// Démarrer
 displayProducts(products);
