@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>اتصل بنا - MatjarStore</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header>
+        <div class="logo"><a href="index.html" style="color:white; text-decoration:none;">🛍️ Matjar<span>Store</span></a></div>
+        <a href="index.html" class="cart-btn" style="text-decoration:none;">العودة للمتجر 🏠</a>
+    </header>
+
+    <main class="page-container">
+        <h1>اتصل بنا (Contact Us)</h1>
+        <p>عندك شي سؤال أو استفسار بخصوص شي منتوج أو طلبية؟ تواصل معانا مباشرة وغادي نجاوبوك في أقرب وقت.</p>
+
+        <div class="contact-wrapper">
+            <!-- معلومات التواصل -->
+            <div class="contact-info">
+                <h3>معلومات التواصل</h3>
+                <p>📱 <strong>الهاتف / واتساب:</strong> 0600000000</p>
+                <p>📧 <strong>البريد الإلكتروني:</strong> contact@matjarstore.ma</p>
+                <p>📍 <strong>العنوان:</strong> الدار البيضاء / الرباط، المغرب</p>
+                <p>⏰ <strong>أوقات العمل:</strong> الإثنين - السبت (9:00 صباحاً - 8:00 مساءً)</p>
+            </div>
+
+            <!-- نموذج المراسلة -->
+            <form class="contact-form" onsubmit="sendContactMessage(event)">
+                <h3>أرسل لنا رسالة</h3>
+                <input type="text" id="contact-name" placeholder="الاسم الكامل" required>
+                <input type="tel" id="contact-phone" placeholder="رقم الهاتف" required>
+                <textarea id="contact-msg" rows="5" placeholder="اكتب رسالتك أو استفسارك هنا..." required></textarea>
+                <button type="submit" class="order-btn">إرسال عبر واتساب 💬</button>
+            </form>
+        </div>
+    </main>
+
+    <footer>
+        <div class="footer-links">
+            <a href="index.html">الرئيسية</a> |
+            <a href="privacy.html">سياسة الخصوصية</a> |
+            <a href="contact.html">اتصل بنا</a>
+        </div>
+        <p>© 2026 MatjarStore - جميع الحقوق محفوظة</p>
+    </footer>
+
+    <script>
+        function sendContactMessage(event) {
+            event.preventDefault();
+            const name = document.getElementById("contact-name").value;
+            const phone = document.getElementById("contact-phone").value;
+            const msg = document.getElementById("contact-msg").value;
+
+            // Bdel had nemra b nemrtk dial WhatsApp
+            const yourWhatsAppNumber = "212600000000"; 
+            
+            const whatsappText = `رسالة جديدة من صفحة اتصل بنا:%0A%0A*الاسم:* ${name}%0A*الهاتف:* ${phone}%0A*الرسالة:* ${msg}`;
+            window.open(`https://wa.me/${yourWhatsAppNumber}?text=${whatsappText}`, "_blank");
+            event.target.reset();
+        }
+    </script>
+
+</body>
+</html>
